@@ -50,11 +50,11 @@ class Itella_Cod_Admin extends Itella_Gateway_COD
   {
 
     parent::__construct();
-    $this->name = 'itella-cod';
+    $this->name = 'itella_cod';
     $this->version = '1.0.0';
 
     add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
-    add_action('woocommerce_settings_api_form_fields_cod', array($this, 'extend_cod'));
+    add_action('woocommerce_settings_api_form_fields_itella_cod', array($this, 'extend_cod'));
 
 
   }
@@ -131,8 +131,8 @@ class Itella_Cod_Admin extends Itella_Gateway_COD
         )
     );
 
-    var_dump($form_fields);
-    die;
+//    var_dump($form_fields);
+//    die;
 
     return $form_fields;
   }

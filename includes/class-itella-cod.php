@@ -37,7 +37,6 @@ class Itella_Cod
     $this->version = '1.0.0';
 
     add_action('plugins_loaded', array($this, 'load_dependencies'));
-//    add_action( 'plugins_loaded', 'itella_gateway_cod_init', 11 );
     add_action('admin_notices', array($this, 'notify_on_activation'));
     add_filter('woocommerce_payment_gateways', array($this, 'load_itella_cod'));
 

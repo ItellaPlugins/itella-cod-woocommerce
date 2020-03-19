@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Cash on Delivery Gateway.
+ * Itella Cash on Delivery Gateway.
  *
  * Provides a Cash on Delivery Payment Gateway.
  *
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  * @version     1.0.0
  * @package     WooCommerce/Classes/Payment
  */
-class Itella_Gateway_COD extends WC_Payment_Gateway
+class Itella_Gateway_COD extends WC_Gateway_COD
 {
 
   /**
@@ -28,26 +28,8 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
    */
   public function __construct()
   {
-    // Setup general properties.
-    $this->setup_properties();
-
-    // Load the settings.
-    $this->init_form_fields();
-    $this->init_settings();
-
-    // Get settings.
-    $this->title = $this->get_option('title');
-    $this->description = $this->get_option('description');
-    $this->instructions = $this->get_option('instructions');
-    $this->enable_for_methods = $this->get_option('enable_for_methods', array());
-    $this->enable_for_virtual = $this->get_option('enable_for_virtual', 'yes') === 'yes';
-
-    add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
-    add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
-    add_filter('woocommerce_payment_complete_order_status', array($this, 'change_payment_complete_order_status'), 10, 3);
-
-    // Customer Emails.
-    add_action('woocommerce_email_before_order_table', array($this, 'email_instructions'), 10, 3);
+    
+    parent::__construct();
   }
 
   /**
@@ -55,11 +37,12 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
    */
   protected function setup_properties()
   {
-    $this->id = 'itella-cod';
+    parent::setup_properties();
+    $this->id = 'itella_cod';
     $this->icon = apply_filters('woocommerce_cod_icon', '');
-    $this->method_title = __('Itella Cash on Delivery', 'itella-cod');
-    $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella-cod');
-    $this->has_fields = false;
+    $this->method_title = __('Itella Cash on Delivery', 'itella_cod');
+    $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella_cod');
+//    $this->has_fields = false;
   }
 
   /**
@@ -68,51 +51,51 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
   public function init_form_fields()
   {
     $this->form_fields = array(
-        'enabled' => array(
-            'title' => __('Enable/Disable', 'itella-cod'),
-            'label' => __('Enable cash on delivery', 'itella-cod'),
-            'type' => 'checkbox',
+        'enabled'            => array(
+            'title'       => __( 'Enable/Disable', 'itella_cod' ),
+            'label'       => __( 'Enable cash on delivery', 'itella_cod' ),
+            'type'        => 'checkbox',
             'description' => '',
-            'default' => 'no',
+            'default'     => 'no',
         ),
-        'title' => array(
-            'title' => __('Title', 'itella-cod'),
-            'type' => 'text',
-            'description' => __('Payment method description that the customer will see on your checkout.', 'itella-cod'),
-            'default' => __('Cash on delivery', 'itella-cod'),
-            'desc_tip' => true,
+        'title'              => array(
+            'title'       => __( 'Title', 'itella_cod' ),
+            'type'        => 'text',
+            'description' => __( 'Payment method description that the customer will see on your checkout.', 'itella_cod' ),
+            'default'     => __( 'Cash on delivery', 'itella_cod' ),
+            'desc_tip'    => true,
         ),
-        'description' => array(
-            'title' => __('Description', 'itella-cod'),
-            'type' => 'textarea',
-            'description' => __('Payment method description that the customer will see on your website.', 'itella-cod'),
-            'default' => __('Pay with cash upon delivery.', 'itella-cod'),
-            'desc_tip' => true,
+        'description'        => array(
+            'title'       => __( 'Description', 'itella_cod' ),
+            'type'        => 'textarea',
+            'description' => __( 'Payment method description that the customer will see on your website.', 'itella_cod' ),
+            'default'     => __( 'Pay with cash upon delivery.', 'itella_cod' ),
+            'desc_tip'    => true,
         ),
-        'instructions' => array(
-            'title' => __('Instructions', 'itella-cod'),
-            'type' => 'textarea',
-            'description' => __('Instructions that will be added to the thank you page.', 'itella-cod'),
-            'default' => __('Pay with cash upon delivery.', 'itella-cod'),
-            'desc_tip' => true,
+        'instructions'       => array(
+            'title'       => __( 'Instructions', 'itella_cod' ),
+            'type'        => 'textarea',
+            'description' => __( 'Instructions that will be added to the thank you page.', 'itella_cod' ),
+            'default'     => __( 'Pay with cash upon delivery.', 'itella_cod' ),
+            'desc_tip'    => true,
         ),
         'enable_for_methods' => array(
-            'title' => __('Enable for shipping methods', 'itella-cod'),
-            'type' => 'multiselect',
-            'class' => 'wc-enhanced-select',
-            'css' => 'width: 400px;',
-            'default' => '',
-            'description' => __('If COD is only available for certain methods, set it up here. Leave blank to enable for all methods.', 'itella-cod'),
-            'options' => $this->load_shipping_method_options(),
-            'desc_tip' => true,
+            'title'             => __( 'Enable for shipping methods', 'itella_cod' ),
+            'type'              => 'multiselect',
+            'class'             => 'wc-enhanced-select',
+            'css'               => 'width: 400px;',
+            'default'           => '',
+            'description'       => __( 'If COD is only available for certain methods, set it up here. Leave blank to enable for all methods.', 'itella_cod' ),
+            'options'           => $this->load_shipping_method_options(),
+            'desc_tip'          => true,
             'custom_attributes' => array(
-                'data-placeholder' => __('Select shipping methods', 'itella-cod'),
+                'data-placeholder' => __( 'Select shipping methods', 'itella_cod' ),
             ),
         ),
         'enable_for_virtual' => array(
-            'title' => __('Accept for virtual orders', 'itella-cod'),
-            'label' => __('Accept COD if the order is virtual', 'itella-cod'),
-            'type' => 'checkbox',
+            'title'   => __( 'Accept for virtual orders', 'itella_cod' ),
+            'label'   => __( 'Accept COD if the order is virtual', 'itella_cod' ),
+            'type'    => 'checkbox',
             'default' => 'yes',
         ),
     );
@@ -188,7 +171,7 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
       if (!isset($_REQUEST['tab']) || 'checkout' !== $_REQUEST['tab']) {
         return false;
       }
-      if (!isset($_REQUEST['section']) || 'cod' !== $_REQUEST['section']) {
+      if (!isset($_REQUEST['section']) || 'itella_cod' !== $_REQUEST['section']) {
         return false;
       }
       // phpcs:enable WordPress.Security.NonceVerification
@@ -213,6 +196,7 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
    */
   private function load_shipping_method_options()
   {
+
     // Since this is expensive, we only want to do it if we're actually on the settings page.
     if (!$this->is_accessing_settings()) {
       return array();
@@ -233,7 +217,7 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
       $options[$method->get_method_title()] = array();
 
       // Translators: %1$s shipping method name.
-      $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'itella-cod'), $method->get_method_title());
+      $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'itella_cod'), $method->get_method_title());
 
       foreach ($zones as $zone) {
 
@@ -248,10 +232,10 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
           $option_id = $shipping_method_instance->get_rate_id();
 
           // Translators: %1$s shipping method title, %2$s shipping method id.
-          $option_instance_title = sprintf(__('%1$s (#%2$s)', 'itella-cod'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
+          $option_instance_title = sprintf(__('%1$s (#%2$s)', 'itella_cod'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
 
           // Translators: %1$s zone name, %2$s shipping method instance name.
-          $option_title = sprintf(__('%1$s &ndash; %2$s', 'itella-cod'), $zone->get_id() ? $zone->get_zone_name() : __('Other locations', 'itella-cod'), $option_instance_title);
+          $option_title = sprintf(__('%1$s &ndash; %2$s', 'itella_cod'), $zone->get_id() ? $zone->get_zone_name() : __('Other locations', 'itella_cod'), $option_instance_title);
 
           $options[$method->get_method_title()][$option_id] = $option_title;
         }
@@ -333,7 +317,7 @@ class Itella_Gateway_COD extends WC_Payment_Gateway
 
     if ($order->get_total() > 0) {
       // Mark as processing or on-hold (payment won't be taken until delivery).
-      $order->update_status(apply_filters('woocommerce_cod_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order), __('Payment to be made upon delivery.', 'itella-cod'));
+      $order->update_status(apply_filters('woocommerce_cod_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order), __('Payment to be made upon delivery.', 'itella_cod'));
     } else {
       $order->payment_complete();
     }
