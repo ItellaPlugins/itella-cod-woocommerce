@@ -18,7 +18,7 @@
  * @package    Itella_COD_Plugin
  * @subpackage Itella_COD_Plugin/admin
  */
-class Itella_Cod_Admin extends WC_Gateway_COD
+class Itella_Cod_Admin extends Itella_Gateway_COD
 {
 
   /**
