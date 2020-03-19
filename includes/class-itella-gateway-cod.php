@@ -28,7 +28,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function __construct()
   {
-    
+
     parent::__construct();
   }
 
@@ -51,53 +51,73 @@ class Itella_Gateway_COD extends WC_Gateway_COD
   public function init_form_fields()
   {
     $this->form_fields = array(
-        'enabled'            => array(
-            'title'       => __( 'Enable/Disable', 'itella_cod' ),
-            'label'       => __( 'Enable cash on delivery', 'itella_cod' ),
-            'type'        => 'checkbox',
+        'enabled' => array(
+            'title' => __('Enable/Disable', 'itella_cod'),
+            'label' => __('Enable cash on delivery', 'itella_cod'),
+            'type' => 'checkbox',
             'description' => '',
-            'default'     => 'no',
+            'default' => 'no',
         ),
-        'title'              => array(
-            'title'       => __( 'Title', 'itella_cod' ),
-            'type'        => 'text',
-            'description' => __( 'Payment method description that the customer will see on your checkout.', 'itella_cod' ),
-            'default'     => __( 'Cash on delivery', 'itella_cod' ),
-            'desc_tip'    => true,
+        'title' => array(
+            'title' => __('Title', 'itella_cod'),
+            'type' => 'text',
+            'description' => __('Payment method description that the customer will see on your checkout.', 'itella_cod'),
+            'default' => __('Cash on delivery', 'itella_cod'),
+            'desc_tip' => true,
         ),
-        'description'        => array(
-            'title'       => __( 'Description', 'itella_cod' ),
-            'type'        => 'textarea',
-            'description' => __( 'Payment method description that the customer will see on your website.', 'itella_cod' ),
-            'default'     => __( 'Pay with cash upon delivery.', 'itella_cod' ),
-            'desc_tip'    => true,
+        'description' => array(
+            'title' => __('Description', 'itella_cod'),
+            'type' => 'textarea',
+            'description' => __('Payment method description that the customer will see on your website.', 'itella_cod'),
+            'default' => __('Pay with cash upon delivery.', 'itella_cod'),
+            'desc_tip' => true,
         ),
-        'instructions'       => array(
-            'title'       => __( 'Instructions', 'itella_cod' ),
-            'type'        => 'textarea',
-            'description' => __( 'Instructions that will be added to the thank you page.', 'itella_cod' ),
-            'default'     => __( 'Pay with cash upon delivery.', 'itella_cod' ),
-            'desc_tip'    => true,
+        'instructions' => array(
+            'title' => __('Instructions', 'itella_cod'),
+            'type' => 'textarea',
+            'description' => __('Instructions that will be added to the thank you page.', 'itella_cod'),
+            'default' => __('Pay with cash upon delivery.', 'itella_cod'),
+            'desc_tip' => true,
         ),
         'enable_for_methods' => array(
-            'title'             => __( 'Enable for shipping methods', 'itella_cod' ),
-            'type'              => 'multiselect',
-            'class'             => 'wc-enhanced-select',
-            'css'               => 'width: 400px;',
-            'default'           => '',
-            'description'       => __( 'If COD is only available for certain methods, set it up here. Leave blank to enable for all methods.', 'itella_cod' ),
-            'options'           => $this->load_shipping_method_options(),
-            'desc_tip'          => true,
+            'title' => __('Enable for shipping methods', 'itella_cod'),
+            'type' => 'multiselect',
+            'class' => 'wc-enhanced-select',
+            'css' => 'width: 400px;',
+            'default' => '',
+            'description' => __('If COD is only available for certain methods, set it up here. Leave blank to enable for all methods.', 'itella_cod'),
+            'options' => $this->load_shipping_method_options(),
+            'desc_tip' => true,
             'custom_attributes' => array(
-                'data-placeholder' => __( 'Select shipping methods', 'itella_cod' ),
+                'data-placeholder' => __('Select shipping methods', 'itella_cod'),
             ),
         ),
         'enable_for_virtual' => array(
-            'title'   => __( 'Accept for virtual orders', 'itella_cod' ),
-            'label'   => __( 'Accept COD if the order is virtual', 'itella_cod' ),
-            'type'    => 'checkbox',
+            'title' => __('Accept for virtual orders', 'itella_cod'),
+            'label' => __('Accept COD if the order is virtual', 'itella_cod'),
+            'type' => 'checkbox',
             'default' => 'yes',
         ),
+        'extra_fee' => array(
+            'title' => __('Extra Fee', 'itella-cod'),
+            'type' => 'price',
+            'class' => '',
+            'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella-cod'),
+            'desc_tip' => true,
+            'placeholder' => __('Enter Amount', 'itella-cod')
+        ),
+
+        'nocharge_amount' => array(
+            'title' => __('Disable extra fee if cart amount is greater or equal than this limit.', 'itella-cod'),
+            'type' => 'price',
+            'class' => '',
+            'description' => __('Leave blank or zero if you want to charge for any amount', 'itella-cod'),
+            'desc_tip' => true,
+            'placeholder' => __('Enter Amount', 'itella-cod'),
+            'custom_attributes' => array(
+                'data-name' => 'nocharge_amount'
+            )
+        )
     );
   }
 
@@ -214,34 +234,37 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $options = array();
     foreach (WC()->shipping()->load_shipping_methods() as $method) {
 
-      $options[$method->get_method_title()] = array();
+      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
+        $options[$method->get_method_title()] = array();
 
-      // Translators: %1$s shipping method name.
-      $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'itella_cod'), $method->get_method_title());
+        // Translators: %1$s shipping method name.
+        $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'itella_cod'), $method->get_method_title());
 
-      foreach ($zones as $zone) {
+        foreach ($zones as $zone) {
 
-        $shipping_method_instances = $zone->get_shipping_methods();
+          $shipping_method_instances = $zone->get_shipping_methods();
 
-        foreach ($shipping_method_instances as $shipping_method_instance_id => $shipping_method_instance) {
+          foreach ($shipping_method_instances as $shipping_method_instance_id => $shipping_method_instance) {
 
-          if ($shipping_method_instance->id !== $method->id) {
-            continue;
+            if ($shipping_method_instance->id !== $method->id) {
+              continue;
+            }
+
+            $option_id = $shipping_method_instance->get_rate_id();
+
+            // Translators: %1$s shipping method title, %2$s shipping method id.
+            $option_instance_title = sprintf(__('%1$s (#%2$s)', 'itella_cod'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
+
+            // Translators: %1$s zone name, %2$s shipping method instance name.
+            $option_title = sprintf(__('%1$s &ndash; %2$s', 'itella_cod'), $zone->get_id() ? $zone->get_zone_name() : __('Other locations', 'itella_cod'), $option_instance_title);
+
+            $options[$method->get_method_title()][$option_id] = $option_title;
           }
-
-          $option_id = $shipping_method_instance->get_rate_id();
-
-          // Translators: %1$s shipping method title, %2$s shipping method id.
-          $option_instance_title = sprintf(__('%1$s (#%2$s)', 'itella_cod'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
-
-          // Translators: %1$s zone name, %2$s shipping method instance name.
-          $option_title = sprintf(__('%1$s &ndash; %2$s', 'itella_cod'), $zone->get_id() ? $zone->get_zone_name() : __('Other locations', 'itella_cod'), $option_instance_title);
-
-          $options[$method->get_method_title()][$option_id] = $option_title;
         }
       }
     }
-
+    var_dump($options);
+    die;
     return $options;
   }
 
