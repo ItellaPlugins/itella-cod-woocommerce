@@ -106,31 +106,4 @@ class Itella_Cod_Admin extends Itella_Gateway_COD
     wp_enqueue_script($this->name, plugin_dir_url(__FILE__) . 'js/itella-cod-admin.js', array('jquery'), $this->version, FALSE);
 
   }
-
-//  public function extend_itella_cod($form_fields)
-//  {
-//
-//    $form_fields['extra_fee'] = array(
-//        'title' => __('Extra Fee', 'itella-cod'),
-//        'type' => 'price',
-//        'class' => '',
-//        'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella-cod'),
-//        'desc_tip' => true,
-//        'placeholder' => __('Enter Amount', 'itella-cod')
-//    );
-//
-//    $form_fields['nocharge_amount'] = array(
-//        'title' => __('Disable extra fee if cart amount is greater or equal than this limit.', 'itella-cod'),
-//        'type' => 'price',
-//        'class' => '',
-//        'description' => __('Leave blank or zero if you want to charge for any amount', 'itella-cod'),
-//        'desc_tip' => true,
-//        'placeholder' => __('Enter Amount', 'itella-cod'),
-//        'custom_attributes' => array(
-//            'data-name' => 'nocharge_amount'
-//        )
-//    );
-//
-//    return $form_fields;
-//  }
 }

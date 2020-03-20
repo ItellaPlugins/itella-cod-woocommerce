@@ -23,6 +23,8 @@ if (!defined('ABSPATH')) {
 class Itella_Gateway_COD extends WC_Gateway_COD
 {
 
+  public $countries;
+
   /**
    * Constructor for the gateway.
    */
@@ -42,7 +44,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $this->icon = apply_filters('woocommerce_cod_icon', '');
     $this->method_title = __('Itella Cash on Delivery', 'itella_cod');
     $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella_cod');
-//    $this->has_fields = false;
+    $this->countries = new WC_Countries();
   }
 
   /**
@@ -85,7 +87,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             'class' => 'wc-enhanced-select',
             'css' => 'width: 400px;',
             'default' => '',
-            'description' => __('If COD is only available for certain methods, set it up here. Leave blank to enable for all methods.', 'itella_cod'),
+            'description' => __('Select Itella COD methods.', 'itella_cod'),
             'options' => $this->load_shipping_method_options(),
             'desc_tip' => true,
             'custom_attributes' => array(
@@ -98,15 +100,39 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             'type' => 'checkbox',
             'default' => 'yes',
         ),
+        'enabled_countries' => array(
+            'title' => __('Enable on specific countries', 'itella_cod'),
+            'type' => 'multiselect',
+            'class' => 'wc-enhanced-select wc-smart-cod-group wc-smart-cod-restriction',
+            'description' => __('Select the countries you want to enable the Itella COD method', 'itella_cod'),
+            'options' => $this->countries->get_allowed_countries(),
+            'desc_tip' => true,
+            'custom_attributes' => array(
+                'data-placeholder' => __('Select Countries', 'itella_cod'),
+                'data-name' => 'enabled_countries'
+            )
+        ),
         'extra_fee' => array(
             'title' => __('Extra Fee', 'itella-cod'),
             'type' => 'price',
-            'class' => '',
+            'class' => 'wc-smart-cod-group wc-smart-cod-percentage',
             'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella-cod'),
             'desc_tip' => true,
             'placeholder' => __('Enter Amount', 'itella-cod')
         ),
-
+        'extra_fee_tax' => array(
+            'title' => __('Extra Fee Tax', 'itella-cod'),
+            'type' => 'radio',
+            'parent_class' => '',
+            'class' => '',
+            'options' => array(
+                'enable' => __('Enable', 'itella-cod'),
+                'disable' => __('Disable', 'itella-cod')
+            ),
+            'default' => 'disable',
+            'description' => __('Is extra fee taxable? Use this option if you have taxes enabled in your shop and you want to include tax to COD method.', 'itella-cod'),
+            'desc_tip' => false
+        ),
         'nocharge_amount' => array(
             'title' => __('Disable extra fee if cart amount is greater or equal than this limit.', 'itella-cod'),
             'type' => 'price',
@@ -119,6 +145,123 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             )
         )
     );
+  }
+
+  public function generate_radio_html( $key, $data ) {
+
+    $field_key = $this->get_field_key( $key );
+
+    $defaults  = array(
+        'title'             => '',
+        'disabled'          => false,
+        'class'             => '',
+        'css'               => '',
+        'placeholder'       => '',
+        'type'              => 'text',
+        'desc_tip'          => false,
+        'description'       => '',
+        'custom_attributes' => array(),
+        'options'           => array(),
+        'parent_class'		=> '',
+        'default' => ''
+    );
+
+    $data = wp_parse_args( $data, $defaults );
+    $value = esc_attr( $this->get_option( $key ) );
+
+    if( ! $value && ! array_key_exists( $key, $this->settings ) ) {
+      if( $data[ 'default' ] ) {
+        $value = $data[ 'default' ];
+      }
+    }
+
+    ob_start(); ?>
+    <tr valign="top">
+      <th scope="row" class="titledesc">
+        <?php echo $this->get_tooltip_html( $data ); ?>
+        <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data[ 'title' ] ); ?></label>
+      </th>
+      <td class="forminp forminp-<?php echo sanitize_title( $data['type'] ); ?><?php echo $data[ 'parent_class' ] ? ' ' . esc_attr( $data[ 'parent_class' ] ) : ''; ?>">
+        <fieldset>
+          <ul>
+            <?php
+            foreach ( (array) $data['options'] as $option_key => $option_value ) {
+              ?>
+              <li>
+                <label><input
+                      name="<?php echo esc_attr( $field_key ); ?>"
+                      value="<?php echo $option_key; ?>"
+                      type="radio"
+                      style="<?php echo esc_attr( $data['css'] ); ?>"
+                      class="<?php echo esc_attr( $data['class'] ); ?>"
+                      <?php echo $this->get_custom_attribute_html( $data ); ?>
+                      <?php checked( $option_key, $value ); ?>
+                  /> <?php echo esc_attr( $option_value ); ?></label>
+              </li>
+              <?php
+            }
+            ?>
+          </ul>
+          <?php echo $this->get_description_html( $data ); ?>
+        </fieldset>
+      </td>
+    </tr>
+    <?php
+    return ob_get_clean();
+  }
+
+//  public function validate_radio_field( $key, $value ) {
+//    $value = is_null( $value ) ? '' : $value;
+//    return wc_clean( stripslashes( $value ) );
+//  }
+
+//  public function validate_checkboxes_field( $key, $value ) {
+//    $_value = array();
+//    if( ! $value ) {
+//      return array();
+//    }
+//    foreach( $value as $v ) {
+//      array_push( $_value, wc_clean( stripslashes( $v ) ) );
+//    }
+//    return $_value;
+//  }
+
+  /**
+   * Get countries that the store sells to.
+   *
+   * @return array
+   */
+  public function get_allowed_countries()
+  {
+    if ('all' === get_option('woocommerce_allowed_countries')) {
+      return apply_filters('woocommerce_countries_allowed_countries', $this->countries);
+    }
+
+    if ('all_except' === get_option('woocommerce_allowed_countries')) {
+      $except_countries = get_option('woocommerce_all_except_countries', array());
+
+      if (!$except_countries) {
+        return $this->countries;
+      } else {
+        $all_except_countries = $this->countries;
+        foreach ($except_countries as $country) {
+          unset($all_except_countries[$country]);
+        }
+        return apply_filters('woocommerce_countries_allowed_countries', $all_except_countries);
+      }
+    }
+
+    $countries = array();
+
+    $raw_countries = get_option('woocommerce_specific_allowed_countries', array());
+
+    if ($raw_countries) {
+      foreach ($raw_countries as $country) {
+        $countries[$country] = $this->countries[$country];
+      }
+    }
+
+    return apply_filters('woocommerce_countries_allowed_countries', $countries);
   }
 
   /**
@@ -263,8 +406,11 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         }
       }
     }
-    var_dump($options);
-    die;
+    if (empty($options)) {
+      $options['no_data'] = "Couldn't find any Itella shipping methods. Check if Itella shipping plugin is installed";
+    }
+//    var_dump($options);
+//    die;
     return $options;
   }
 
