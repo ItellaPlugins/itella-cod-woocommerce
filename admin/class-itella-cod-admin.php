@@ -54,6 +54,7 @@ class Itella_Cod_Admin extends Itella_Gateway_COD
     $this->version = '1.0.0';
 
     add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
+    add_action('admin_enqueue_scripts', array($this, 'enqueue_styles'));
 //    add_action('woocommerce_settings_api_form_fields_itella_cod', array($this, 'extend_itella_cod'));
 
 
@@ -103,7 +104,7 @@ class Itella_Cod_Admin extends Itella_Gateway_COD
      * class.
      */
 
-    wp_enqueue_script($this->name, plugin_dir_url(__FILE__) . 'js/itella-cod-admin.js', array('jquery'), $this->version, FALSE);
+    wp_enqueue_script($this->name, plugin_dir_url(__FILE__) . 'js/itella-cod-admin.js', array('jquery'), $this->version, TRUE);
 
   }
 }

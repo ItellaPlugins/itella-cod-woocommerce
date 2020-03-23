@@ -6,6 +6,8 @@
  * @subpackage Itella_COD_Plugin/includes
  */
 
+use Automattic\Jetpack\Constants;
+
 if (!defined('ABSPATH')) {
   exit; // Exit if accessed directly.
 }
@@ -112,34 +114,46 @@ class Itella_Gateway_COD extends WC_Gateway_COD
                 'data-name' => 'enabled_countries'
             )
         ),
+        'extra_fee_type' => array(
+            'title' => __('Extra Fee', 'itella_cod'),
+            'type' => 'select',
+            'class' => 'itella-cod-extra-fee-type',
+            'description' => __('Select Extra fee type', 'itella_cod'),
+            'options' => array(
+                'disabled' => 'Disabled',
+                'fixed' => 'Fixed',
+                'percentage' => 'Percentage'
+            )
+
+        ),
         'extra_fee' => array(
-            'title' => __('Extra Fee', 'itella-cod'),
+            'title' => __('Extra Fee', 'itella_cod'),
             'type' => 'price',
-            'class' => 'wc-smart-cod-group wc-smart-cod-percentage',
-            'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella-cod'),
+            'class' => 'itella-cod-extra-fee-amount',
+            'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella_cod'),
             'desc_tip' => true,
-            'placeholder' => __('Enter Amount', 'itella-cod')
+            'placeholder' => __('Enter Amount', 'itella_cod')
         ),
         'extra_fee_tax' => array(
-            'title' => __('Extra Fee Tax', 'itella-cod'),
+            'title' => __('Extra Fee Tax', 'itella_cod'),
             'type' => 'radio',
             'parent_class' => '',
-            'class' => '',
+            'class' => 'itella-cod-extra-fee-tax',
             'options' => array(
-                'enable' => __('Enable', 'itella-cod'),
-                'disable' => __('Disable', 'itella-cod')
+                'enable' => __('Enable', 'itella_cod'),
+                'disable' => __('Disable', 'itella_cod')
             ),
             'default' => 'disable',
-            'description' => __('Is extra fee taxable? Use this option if you have taxes enabled in your shop and you want to include tax to COD method.', 'itella-cod'),
+            'description' => __('Is extra fee taxable? Use this option if you have taxes enabled in your shop and you want to include tax to COD method.', 'itella_cod'),
             'desc_tip' => false
         ),
         'nocharge_amount' => array(
-            'title' => __('Disable extra fee if cart amount is greater or equal than this limit.', 'itella-cod'),
+            'title' => __('Disable extra fee if cart amount is greater or equal than this limit.', 'itella_cod'),
             'type' => 'price',
-            'class' => '',
-            'description' => __('Leave blank or zero if you want to charge for any amount', 'itella-cod'),
+            'class' => 'itella-cod-extra-fee-nocharge',
+            'description' => __('Leave blank or zero if you want to charge for any amount', 'itella_cod'),
             'desc_tip' => true,
-            'placeholder' => __('Enter Amount', 'itella-cod'),
+            'placeholder' => __('Enter Amount', 'itella_cod'),
             'custom_attributes' => array(
                 'data-name' => 'nocharge_amount'
             )
