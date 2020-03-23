@@ -43,7 +43,13 @@ class Itella_Gateway_COD extends WC_Gateway_COD
   {
     parent::setup_properties();
     $this->id = 'itella_cod';
-    $this->icon = apply_filters('woocommerce_cod_icon', '');
+    $this->icon = apply_filters(
+            'woocommerce_itella_cod_icon', plugin_dir_url( dirname( __FILE__ )) . 'assets'
+        . DIRECTORY_SEPARATOR . 'img'
+        . DIRECTORY_SEPARATOR . 'itella.png'
+    );
+//    var_dump($this->icon);
+//    die;
     $this->method_title = __('Itella Cash on Delivery', 'itella_cod');
     $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella_cod');
     $this->countries = new WC_Countries();
@@ -127,7 +133,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
 
         ),
         'extra_fee' => array(
-            'title' => __('Extra Fee', 'itella_cod'),
+            'title' => __('Extra Fee Amount', 'itella_cod'),
             'type' => 'price',
             'class' => 'itella-cod-extra-fee-amount',
             'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella_cod'),
@@ -391,7 +397,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $options = array();
     foreach (WC()->shipping()->load_shipping_methods() as $method) {
 
-      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
+//      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
         $options[$method->get_method_title()] = array();
 
         // Translators: %1$s shipping method name.
@@ -418,7 +424,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             $options[$method->get_method_title()][$option_id] = $option_title;
           }
         }
-      }
+//      }
     }
     if (empty($options)) {
       $options['no_data'] = "Couldn't find any Itella shipping methods. Check if Itella shipping plugin is installed";

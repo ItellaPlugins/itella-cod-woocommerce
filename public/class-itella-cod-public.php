@@ -38,6 +38,12 @@ class Itella_Cod_Public {
 	 */
 	private $version;
 
+  /**
+   * @var array
+   */
+
+	public $itellaCodSettings;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -49,8 +55,11 @@ class Itella_Cod_Public {
 
 		$this->name = $name;
 		$this->version = $version;
+		$this->itellaCodSettings = get_option('woocommerce_itella_cod_settings');
+//        var_dump(get_option('woocommerce_itella_cod_settings'));
+//    die;
 
-	}
+  }
 
 	/**
 	 * Register the stylesheets for the public-facing side of the site.

@@ -1,6 +1,8 @@
 'use strict';
 
 (() => {
+
+    // toggle extra fee fields
     const extraFeeType = document.querySelector('.itella-cod-extra-fee-type');
     const extraFeeAmount = document.querySelector('.itella-cod-extra-fee-amount');
 
