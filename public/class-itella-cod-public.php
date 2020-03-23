@@ -59,6 +59,13 @@ class Itella_Cod_Public {
 //        var_dump(get_option('woocommerce_itella_cod_settings'));
 //    die;
 
+    if( is_admin() )
+      return;
+
+//    add_filter( 'woocommerce_available_payment_gateways', array( $this, 'apply_smart_cod_settings' ) );
+    add_action( 'woocommerce_cart_calculate_fees', array( $this, 'apply_itella_cod_fee' ) );
+//    add_action( 'woocommerce_update_order_review_fragments', array( $this, 'apply_custom_message' ) );
+
   }
 
 	/**
@@ -104,6 +111,39 @@ class Itella_Cod_Public {
 		 */
 
 		wp_enqueue_script( $this->name, plugin_dir_url( __FILE__ ) . 'js/itella-cod-public.js', array( 'jquery' ), $this->version, FALSE );
+
+	}
+
+  public function apply_itella_cod_fee(WC_Cart $cart)
+  {
+
+    $extraFeeType = $this->itellaCodSettings['extra_fee_type'];
+    $isTaxable = $this->itellaCodSettings['extra_fee_tax'] === 'enable' ? true : false;
+    $extraFeeAmount = $this->itellaCodSettings['extra_fee'];
+
+    if ($this->itellaCodSettings['extra_fee_type'] != 'disabled') {
+      if ($extraFeeType === 'fixed' && $isTaxable) {
+        $cart->add_fee('Itella COD', $extraFeeAmount, true);
+      }
+      if ($extraFeeType === 'fixed' && !$isTaxable) {
+        $cart->add_fee('Itella COD', $extraFeeAmount);
+      }
+      if ($extraFeeType === 'percentage' && $isTaxable) {
+
+      }
+      if ($extraFeeType === 'percentage' && !$isTaxable) {
+
+      }
+
+    }
+
+	}
+
+  public function calc_extra_fee_tax()
+  {
+
+    global $woocommerce;
+
 
 	}
 
