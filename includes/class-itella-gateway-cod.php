@@ -48,8 +48,6 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         . DIRECTORY_SEPARATOR . 'img'
         . DIRECTORY_SEPARATOR . 'itella.png'
     );
-//    var_dump($this->icon);
-//    die;
     $this->method_title = __('Itella Cash on Delivery', 'itella_cod');
     $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella_cod');
     $this->countries = new WC_Countries();
