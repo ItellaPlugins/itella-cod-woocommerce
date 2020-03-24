@@ -121,7 +121,7 @@ class Itella_Cod_Public
   public function apply_itella_cod_fee(WC_Cart $cart)
   {
 
-    if ($this->check_enabled_countries() && $this->is_itella_shipping_method_selected()) {
+    if ($this->is_itella_payment_method_selected()) {
       $extra_fee_type = $this->itella_cod_settings['extra_fee_type'];
       $is_taxable = $this->itella_cod_settings['extra_fee_tax'] === 'enable' ? true : false;
       $extra_fee_amount = $this->itella_cod_settings['extra_fee'];
@@ -170,6 +170,18 @@ class Itella_Cod_Public
     $selected_shipping_method = $woocommerce->session->get('chosen_shipping_methods');
 
     return stripos($selected_shipping_method[0], 'itella') !== false ? true : false;
+  }
+
+  /**
+   *  Check if Itella payment method is selected
+   */
+
+  public function is_itella_payment_method_selected()
+  {
+    global $woocommerce;
+    $selected_payment_method = $woocommerce->session->get('chosen_payment_method');
+
+    return $selected_payment_method === 'itella_cod' ? true : false;
   }
 
   /**
