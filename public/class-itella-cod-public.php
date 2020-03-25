@@ -40,9 +40,10 @@ class Itella_Cod_Public
   private $version;
 
   /**
+   * Itella settings defined from admin panel
+   *
    * @var array
    */
-
   public $itella_cod_settings;
 
   /**
@@ -58,15 +59,12 @@ class Itella_Cod_Public
     $this->name = $name;
     $this->version = $version;
     $this->itella_cod_settings = get_option('woocommerce_itella_cod_settings');
-//        var_dump(get_option('woocommerce_itella_cod_settings'));
-//    die;
 
     if (is_admin())
       return;
 
-    add_filter( 'woocommerce_available_payment_gateways', array( $this, 'apply_itella_cod_settings' ) );
+    add_filter('woocommerce_available_payment_gateways', array($this, 'apply_itella_cod_settings'));
     add_action('woocommerce_cart_calculate_fees', array($this, 'apply_itella_cod_fee'));
-//    add_action( 'woocommerce_update_order_review_fragments', array( $this, 'apply_custom_message' ) );
 
   }
 
@@ -77,18 +75,6 @@ class Itella_Cod_Public
    */
   public function enqueue_styles()
   {
-
-    /**
-     * This function is provided for demonstration purposes only.
-     *
-     * An instance of this class should be passed to the run() function
-     * defined in Plugin_Name_Public_Loader as all of the hooks are defined
-     * in that particular class.
-     *
-     * The Plugin_Name_Public_Loader will then create the relationship
-     * between the defined hooks and the functions defined in this
-     * class.
-     */
 
     wp_enqueue_style($this->name, plugin_dir_url(__FILE__) . 'css/itella-cod-public.css', array(), $this->version, 'all');
 
@@ -102,22 +88,15 @@ class Itella_Cod_Public
   public function enqueue_scripts()
   {
 
-    /**
-     * This function is provided for demonstration purposes only.
-     *
-     * An instance of this class should be passed to the run() function
-     * defined in Plugin_Name_Public_Loader as all of the hooks are defined
-     * in that particular class.
-     *
-     * The Plugin_Name_Public_Loader will then create the relationship
-     * between the defined hooks and the functions defined in this
-     * class.
-     */
 
     wp_enqueue_script($this->name, plugin_dir_url(__FILE__) . 'js/itella-cod-public.js', array('jquery'), $this->version, TRUE);
 
   }
 
+  /**
+   * Apply Itella Fee to cart
+   * @param WC_Cart $cart
+   */
   public function apply_itella_cod_fee(WC_Cart $cart)
   {
 
@@ -134,31 +113,48 @@ class Itella_Cod_Public
           $cart->add_fee('Itella COD', $extra_fee_amount);
         }
         if ($extra_fee_type === 'percentage' && $is_taxable) {
-
+          $cart->add_fee('Itella COD', $this->calc_extra_fee_percentage($extra_fee_amount, $cart), true);
         }
         if ($extra_fee_type === 'percentage' && !$is_taxable) {
-
+          $cart->add_fee('Itella COD', $this->calc_extra_fee_percentage($extra_fee_amount, $cart));
         }
-
       }
     }
 
   }
 
-  public function calc_extra_fee_tax()
+  /**
+   * Calculate fee according to percentage
+   *
+   * @param $percentage
+   * @param $cart
+   * @return float|int
+   */
+  public function calc_extra_fee_percentage($percentage, $cart)
   {
 
-    global $woocommerce;
+    $total = $cart->total;
 
+    if (!$total) {
+      $total = $cart->cart_contents_total;
+    }
+
+    return $extra_fee = ($percentage * $total) / 100;
 
   }
 
+  /**
+   * Check if current country is in enabled country array
+   * @return bool
+   */
   public function check_enabled_countries()
   {
+
     global $woocommerce;
     $current_country = $woocommerce->customer->get_shipping_country();
 
     return in_array($current_country, $this->itella_cod_settings['enabled_countries']) ? true : false;
+
   }
 
   /**
@@ -166,41 +162,44 @@ class Itella_Cod_Public
    */
   public function is_itella_shipping_method_selected()
   {
+
     global $woocommerce;
     $selected_shipping_method = $woocommerce->session->get('chosen_shipping_methods');
 
     return stripos($selected_shipping_method[0], 'itella') !== false ? true : false;
+
   }
 
   /**
    *  Check if Itella payment method is selected
    */
-
   public function is_itella_payment_method_selected()
   {
+
     global $woocommerce;
     $selected_payment_method = $woocommerce->session->get('chosen_payment_method');
 
     return $selected_payment_method === 'itella_cod' ? true : false;
+
   }
 
   /**
-   * Check cod availability
+   * Show Itella as a payment gateway if available
    *
    */
+  public function apply_itella_cod_settings($available_gateways)
+  {
 
-  public function apply_itella_cod_settings( $available_gateways ) {
-
-    if( ! function_exists( 'is_checkout' ) || ! is_checkout() && ! is_wc_endpoint_url( 'order-pay' ) )
+    if (!function_exists('is_checkout') || !is_checkout() && !is_wc_endpoint_url('order-pay'))
       return $available_gateways;
 
     if (!$this->check_enabled_countries()) {
-      unset( $available_gateways[ 'itella_cod' ] );
+      unset($available_gateways['itella_cod']);
     }
 
     // disable default cod if itella is selected as shipping method
     if ($this->is_itella_shipping_method_selected()) {
-      unset( $available_gateways[ 'cod' ] );
+      unset($available_gateways['cod']);
     }
 
     return $available_gateways;

@@ -41,16 +41,18 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   protected function setup_properties()
   {
+
     parent::setup_properties();
     $this->id = 'itella_cod';
     $this->icon = apply_filters(
-            'woocommerce_itella_cod_icon', plugin_dir_url( dirname( __FILE__ )) . 'assets'
+        'woocommerce_itella_cod_icon', plugin_dir_url(dirname(__FILE__)) . 'assets'
         . DIRECTORY_SEPARATOR . 'img'
         . DIRECTORY_SEPARATOR . 'itella.png'
     );
     $this->method_title = __('Itella Cash on Delivery', 'itella_cod');
     $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella_cod');
     $this->countries = new WC_Countries();
+
   }
 
   /**
@@ -58,6 +60,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function init_form_fields()
   {
+
     $this->form_fields = array(
         'enabled' => array(
             'title' => __('Enable/Disable', 'itella_cod'),
@@ -163,86 +166,74 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             )
         )
     );
+
   }
 
-  public function generate_radio_html( $key, $data ) {
+  public function generate_radio_html($key, $data)
+  {
 
-    $field_key = $this->get_field_key( $key );
+    $field_key = $this->get_field_key($key);
 
-    $defaults  = array(
-        'title'             => '',
-        'disabled'          => false,
-        'class'             => '',
-        'css'               => '',
-        'placeholder'       => '',
-        'type'              => 'text',
-        'desc_tip'          => false,
-        'description'       => '',
+    $defaults = array(
+        'title' => '',
+        'disabled' => false,
+        'class' => '',
+        'css' => '',
+        'placeholder' => '',
+        'type' => 'text',
+        'desc_tip' => false,
+        'description' => '',
         'custom_attributes' => array(),
-        'options'           => array(),
-        'parent_class'		=> '',
+        'options' => array(),
+        'parent_class' => '',
         'default' => ''
     );
 
-    $data = wp_parse_args( $data, $defaults );
-    $value = esc_attr( $this->get_option( $key ) );
+    $data = wp_parse_args($data, $defaults);
+    $value = esc_attr($this->get_option($key));
 
-    if( ! $value && ! array_key_exists( $key, $this->settings ) ) {
-      if( $data[ 'default' ] ) {
-        $value = $data[ 'default' ];
+    if (!$value && !array_key_exists($key, $this->settings)) {
+      if ($data['default']) {
+        $value = $data['default'];
       }
     }
 
     ob_start(); ?>
-    <tr valign="top">
-      <th scope="row" class="titledesc">
-        <?php echo $this->get_tooltip_html( $data ); ?>
-        <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data[ 'title' ] ); ?></label>
-      </th>
-      <td class="forminp forminp-<?php echo sanitize_title( $data['type'] ); ?><?php echo $data[ 'parent_class' ] ? ' ' . esc_attr( $data[ 'parent_class' ] ) : ''; ?>">
-        <fieldset>
-          <ul>
-            <?php
-            foreach ( (array) $data['options'] as $option_key => $option_value ) {
-              ?>
-              <li>
-                <label><input
-                      name="<?php echo esc_attr( $field_key ); ?>"
-                      value="<?php echo $option_key; ?>"
-                      type="radio"
-                      style="<?php echo esc_attr( $data['css'] ); ?>"
-                      class="<?php echo esc_attr( $data['class'] ); ?>"
-                      <?php echo $this->get_custom_attribute_html( $data ); ?>
-                      <?php checked( $option_key, $value ); ?>
-                  /> <?php echo esc_attr( $option_value ); ?></label>
-              </li>
-              <?php
-            }
-            ?>
-          </ul>
-          <?php echo $this->get_description_html( $data ); ?>
-        </fieldset>
-      </td>
-    </tr>
+      <tr valign="top">
+          <th scope="row" class="titledesc">
+            <?php echo $this->get_tooltip_html($data); ?>
+              <label for="<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></label>
+          </th>
+          <td class="forminp forminp-<?php echo sanitize_title($data['type']); ?><?php echo $data['parent_class'] ? ' ' . esc_attr($data['parent_class']) : ''; ?>">
+              <fieldset>
+                  <ul>
+                    <?php
+                    foreach ((array)$data['options'] as $option_key => $option_value) {
+                      ?>
+                        <li>
+                            <label><input
+                                        name="<?php echo esc_attr($field_key); ?>"
+                                        value="<?php echo $option_key; ?>"
+                                        type="radio"
+                                        style="<?php echo esc_attr($data['css']); ?>"
+                                        class="<?php echo esc_attr($data['class']); ?>"
+                                  <?php echo $this->get_custom_attribute_html($data); ?>
+                                  <?php checked($option_key, $value); ?>
+                                /> <?php echo esc_attr($option_value); ?></label>
+                        </li>
+                      <?php
+                    }
+                    ?>
+                  </ul>
+                <?php echo $this->get_description_html($data); ?>
+              </fieldset>
+          </td>
+      </tr>
     <?php
+
     return ob_get_clean();
+
   }
-
-//  public function validate_radio_field( $key, $value ) {
-//    $value = is_null( $value ) ? '' : $value;
-//    return wc_clean( stripslashes( $value ) );
-//  }
-
-//  public function validate_checkboxes_field( $key, $value ) {
-//    $_value = array();
-//    if( ! $value ) {
-//      return array();
-//    }
-//    foreach( $value as $v ) {
-//      array_push( $_value, wc_clean( stripslashes( $v ) ) );
-//    }
-//    return $_value;
-//  }
 
   /**
    * Get countries that the store sells to.
@@ -251,6 +242,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function get_allowed_countries()
   {
+
     if ('all' === get_option('woocommerce_allowed_countries')) {
       return apply_filters('woocommerce_countries_allowed_countries', $this->countries);
     }
@@ -280,6 +272,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     }
 
     return apply_filters('woocommerce_countries_allowed_countries', $countries);
+
   }
 
   /**
@@ -289,6 +282,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function is_available()
   {
+
     $order = null;
     $needs_shipping = false;
 
@@ -335,6 +329,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     }
 
     return parent::is_available();
+
   }
 
   /**
@@ -344,6 +339,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   private function is_accessing_settings()
   {
+
     if (is_admin()) {
       // phpcs:disable WordPress.Security.NonceVerification
       if (!isset($_REQUEST['page']) || 'wc-settings' !== $_REQUEST['page']) {
@@ -368,6 +364,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     }
 
     return false;
+
   }
 
   /**
@@ -395,7 +392,9 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $options = array();
     foreach (WC()->shipping()->load_shipping_methods() as $method) {
 
-//      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
+
+// -------------------------- omniva for testing purposes -----------------------------
+      if (stripos($method->get_method_title(), 'omniva') !== false) { //show only itella shipping methods
         $options[$method->get_method_title()] = array();
 
         // Translators: %1$s shipping method name.
@@ -422,14 +421,14 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             $options[$method->get_method_title()][$option_id] = $option_title;
           }
         }
-//      }
+      }
     }
     if (empty($options)) {
-      $options['no_data'] = "Couldn't find any Itella shipping methods. Check if Itella shipping plugin is installed";
+      $options['no_data'] = "Couldn't find any Itella shipping methods. Check if Itella shipping plugin is installed"; // TODO proper message
     }
-//    var_dump($options);
-//    die;
+
     return $options;
+
   }
 
   /**
@@ -450,6 +449,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     }
 
     return $canonical_rate_ids;
+
   }
 
   /**
@@ -476,6 +476,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     }
 
     return $canonical_rate_ids;
+
   }
 
   /**
@@ -488,8 +489,10 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   private function get_matching_rates($rate_ids)
   {
+
     // First, match entries in 'method_id:instance_id' format. Then, match entries in 'method_id' format by stripping off the instance ID from the candidates.
     return array_unique(array_merge(array_intersect($this->enable_for_methods, $rate_ids), array_intersect($this->enable_for_methods, array_unique(array_map('wc_get_string_before_colon', $rate_ids)))));
+
   }
 
   /**
@@ -500,11 +503,12 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function process_payment($order_id)
   {
+
     $order = wc_get_order($order_id);
 
     if ($order->get_total() > 0) {
       // Mark as processing or on-hold (payment won't be taken until delivery).
-      $order->update_status(apply_filters('woocommerce_cod_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order), __('Payment to be made upon delivery.', 'itella_cod'));
+      $order->update_status(apply_filters('woocommerce_itella_cod_process_payment_order_status', $order->has_downloadable_item() ? 'on-hold' : 'processing', $order), __('Payment to be made upon delivery.', 'itella_cod'));
     } else {
       $order->payment_complete();
     }
@@ -517,6 +521,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         'result' => 'success',
         'redirect' => $this->get_return_url($order),
     );
+
   }
 
   /**
@@ -524,9 +529,11 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function thankyou_page()
   {
+
     if ($this->instructions) {
       echo wp_kses_post(wpautop(wptexturize($this->instructions)));
     }
+
   }
 
   /**
@@ -540,10 +547,13 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function change_payment_complete_order_status($status, $order_id = 0, $order = false)
   {
-    if ($order && 'cod' === $order->get_payment_method()) {
+
+    if ($order && 'itella_cod' === $order->get_payment_method()) {
       $status = 'completed';
     }
+
     return $status;
+
   }
 
   /**
@@ -555,8 +565,11 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function email_instructions($order, $sent_to_admin, $plain_text = false)
   {
+
     if ($this->instructions && !$sent_to_admin && $this->id === $order->get_payment_method()) {
       echo wp_kses_post(wpautop(wptexturize($this->instructions)) . PHP_EOL);
     }
+
   }
+
 }
