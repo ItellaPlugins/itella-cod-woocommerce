@@ -1,4 +1,4 @@
-### Itella COD plugin
+# Itella COD plugin
 
 Cash on Delivery plugin to use with Itella shipping methods
 
