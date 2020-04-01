@@ -152,8 +152,9 @@ class Itella_Cod_Public
 
     global $woocommerce;
     $current_country = $woocommerce->customer->get_shipping_country();
+    $enabledCountries[] = $this->itella_cod_settings['enabled_countries'];
 
-    return in_array($current_country, $this->itella_cod_settings['enabled_countries']) ? true : false;
+    return in_array($current_country, $enabledCountries) ? true : false;
 
   }
 
@@ -198,9 +199,9 @@ class Itella_Cod_Public
     }
 
     // disable default cod if itella is selected as shipping method
-    if ($this->is_itella_shipping_method_selected()) {
-      unset($available_gateways['cod']);
-    }
+//    if ($this->is_itella_shipping_method_selected()) {
+//      unset($available_gateways['cod']);
+//    }
 
     return $available_gateways;
   }
