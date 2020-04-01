@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
  * Provides a Cash on Delivery Payment Gateway.
  *
  * @class       Itella_Gateway_COD
- * @extends     WC_Payment_Gateway
+ * @extends     WC_Gateway_COD
  * @version     1.0.0
  * @package     WooCommerce/Classes/Payment
  */
@@ -116,6 +116,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             'description' => __('Select the countries you want to enable the Itella COD method', 'itella_cod'),
             'options' => $this->countries->get_allowed_countries(),
             'desc_tip' => true,
+            'required' => true,
             'custom_attributes' => array(
                 'data-placeholder' => __('Select Countries', 'itella_cod'),
                 'data-name' => 'enabled_countries'
@@ -392,9 +393,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $options = array();
     foreach (WC()->shipping()->load_shipping_methods() as $method) {
 
-
-// -------------------------- omniva for testing purposes -----------------------------
-      if (stripos($method->get_method_title(), 'omniva') !== false) { //show only itella shipping methods
+//      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
         $options[$method->get_method_title()] = array();
 
         // Translators: %1$s shipping method name.
@@ -421,14 +420,29 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             $options[$method->get_method_title()][$option_id] = $option_title;
           }
         }
-      }
-    }
-    if (empty($options)) {
-      $options['no_data'] = "Couldn't find any Itella shipping methods. Check if Itella shipping plugin is installed"; // TODO proper message
+//      }
     }
 
     return $options;
 
+  }
+
+  public function process_admin_options()
+  {
+
+    $post_data  = $this->get_post_data();
+
+    if (!isset($post_data['woocommerce_itella_cod_enable_for_methods'])) {
+      WC_Admin_Settings::add_error('Please enable at least one shipping method');
+      $_POST['woocommerce_itella_cod_enable_for_methods'] = ''; // prevent from generating same error again
+      
+    }
+    if (!isset($post_data['woocommerce_itella_cod_enabled_countries'])) {
+      WC_Admin_Settings::add_error('Please enable at least one country');
+      $_POST['woocommerce_itella_cod_enabled_countries'] = ''; // prevent from generating same error again
+    }
+
+    return parent::process_admin_options();
   }
 
   /**

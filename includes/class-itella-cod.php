@@ -135,7 +135,7 @@ class Itella_Cod
 
     $plugin_admin = new Itella_Cod_Admin($this->get_plugin_name(), $this->get_version());
 
-    $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+    $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
     $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
   }
@@ -206,8 +206,8 @@ class Itella_Cod
 
     if (get_transient('itella-cod-activated')) : ?>
         <div class="updated notice is-dismissible">
-            <p>Setup COD <a
-                        href="<?php echo admin_url('admin.php?page=wc-settings&tab=checkout&section=itella_cod'); ?>">here</a>.
+            <p>Setup Itella COD
+                <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=checkout&section=itella_cod'); ?>">here</a>.
             </p>
         </div>
       <?php
