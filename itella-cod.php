@@ -34,7 +34,7 @@ register_deactivation_hook( __FILE__, array('Itella_Cod_Deactivator', 'deactivat
 // main class
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-itella-cod.php';
 
-function run_Itella_cod() {
+function run_itella_cod() {
 
 	$plugin = new Itella_Cod();
 }

@@ -6,7 +6,7 @@ Cash on Delivery plugin to use with Itella shipping methods
 
 * Enable Itella COD for specific countries
 * Set Extra Fee - fixed/percentage, taxable; disable after specific amount
-* Logo on checkout's Itella payment option
+* Logo in checkout's Itella payment option
 
 
 ## Installation
