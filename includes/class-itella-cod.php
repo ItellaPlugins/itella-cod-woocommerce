@@ -206,8 +206,11 @@ class Itella_Cod
 
     if (get_transient('itella-cod-activated')) : ?>
         <div class="updated notice is-dismissible">
-            <p>Setup Itella COD
-                <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=checkout&section=itella_cod'); ?>">here</a>.
+            <p>
+              <?= __('Setup Itella COD', 'itella-cod') ?>
+                <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=checkout&section=itella_cod'); ?>">
+                    <?= __('here', 'itella-cod') ?>
+                </a>.
             </p>
         </div>
       <?php

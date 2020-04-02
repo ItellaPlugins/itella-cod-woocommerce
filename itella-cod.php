@@ -11,7 +11,7 @@
  * Description:       COD plugin for Itella
  * Version:           1.0.0
  * Author:            Itella Team
- * Author URI:        www.Itella.lt
+ * Author URI:        www.itella.lt
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       itella-cod

@@ -1,15 +1,14 @@
-# Loco Gettext template
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Itella COD\n"
-"Report-Msgid-Bugs-To: mantas tarutis\n"
-"POT-Creation-Date: 2020-04-02 16:21+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-25 13:00+0200\n"
+"PO-Revision-Date: 2020-04-02 16:20+0300\n"
+"Last-Translator: mantas tarutis\n"
+"Language-Team: Lithuanian (Lithuania)\n"
+"Language: lt-LT\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 "
+"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,112 +19,120 @@ msgstr ""
 
 #: loco:5e858969ed0cfa3c0c772092
 msgid "Itella Cash on Delivery"
-msgstr ""
+msgstr "Itella išperkamasis mokestis (COD)"
 
 #: loco:5e8589d9ed0cfa3bd81d7f82
 msgid "Setup Itella's Cash on Delivery."
-msgstr ""
+msgstr "Sukonfigūruokite Itella išperkamąjį mokestį (COD)"
 
 #: loco:5e858df0ed0cfa3cf544d603
 msgid "Select Itella COD methods."
-msgstr ""
+msgstr "Pasirinkite Itella siuntimo būdus"
 
 #: loco:5e858e23ed0cfa3d903633d2
 msgid "Enable for specific countries"
-msgstr ""
+msgstr "Pasirinkite šalis, kur galimas šis atsiskaitymo būdas"
 
 #: loco:5e858ecded0cfa3da4537012
 msgid "Select Extra fee type"
-msgstr ""
+msgstr "Pasirinkite papildomo mokesčio tipą"
 
 #: loco:5e858eeaed0cfa3da13ef7d2
 msgid "Extra Fee Amount"
-msgstr ""
+msgstr "Papildomo mokesčio dydis"
 
 #: loco:5e858f33ed0cfa3dac34a163
 msgid "Enter Amount"
-msgstr ""
+msgstr "Įveskite sumą"
 
 #: loco:5e858ff2ed0cfa3dda11e332
 msgid "Extra Fee Tax"
-msgstr ""
+msgstr "Papildomo mokesčio apmokestinimas"
 
 #: loco:5e859223ed0cfa3ff1443572
 msgid ""
 "Is extra fee taxable? Use this option if you have taxes enabled in your shop "
 "and you want to include tax to COD method."
 msgstr ""
+"Ar papildomas mokestis apmokestinamas? Pasirinkite šią opciją, jei savo "
+"parduotuvėje esate įjungę mokesčius ir norite juos įtraukti išperkamojo "
+"mokesčio (COD) būdui."
 
 #: loco:5e8592c9ed0cfa40243065d3
 msgid "Disable extra fee if cart amount is greater or equal than this limit."
-msgstr ""
+msgstr "Krepšelio suma, nuo kurios išjungiamas papildomas mokestis."
 
 #: loco:5e859327ed0cfa40212b2e82
 msgid "Leave blank or zero if you want to charge for any amount"
 msgstr ""
+"Palikite tuščią arba įrašykite nulį, jei norite visada taikyti papildomą "
+"mokestį"
 
 #: loco:5e859423ed0cfa407926ae42
 msgid "Fixed"
-msgstr ""
+msgstr "Fiksuotas"
 
 #: loco:5e859437ed0cfa4084101754
 msgid "Percentage"
-msgstr ""
+msgstr "Procentinis dydis"
 
 #: loco:5e859540ed0cfa420c4380f2
 msgid "Setup Itella COD"
-msgstr ""
+msgstr "Sukonfigūruokite Itella išperkamąjį mokestį (COD)"
 
 #: loco:5e85956ded0cfa423a326b12
 msgid "here"
-msgstr ""
+msgstr "čia"
 
 #: loco:5e85962ded0cfa4268361372
 msgid "Itella COD"
-msgstr ""
+msgstr "Itella išperkamasis mokestis (COD)"
 
 #: loco:5e85af434d3dd73fb45f67a3
 msgid "Select Countries"
-msgstr ""
+msgstr "Pasirinkite šalis"
 
 #: loco:5e85b33d4d3dd74115210902
 msgid "Pay with cash upon delivery."
-msgstr ""
+msgstr "Mokėkite grynais pristatymo metu."
 
 #: loco:5e85baca4d3dd742fa636b55
 msgid "Enable"
-msgstr ""
+msgstr "Įjungti"
 
 #: loco:5e85bad94d3dd743126f0945
 msgid "Disable"
-msgstr ""
+msgstr "Išjungti"
 
 #: loco:5e85bb204d3dd743475b7e92
 msgid "Disabled"
-msgstr ""
+msgstr "Išjungtas"
 
 #: loco:5e85bd30ed0cfa585f667b92
 msgid "Extra Fee"
-msgstr ""
+msgstr "Papildomas mokestis"
 
 #: loco:5e85bfc3ed0cfa59fd6b8884
 msgid "Select countries you want to enable the Itella COD method"
 msgstr ""
+"Pasirinkite šalis, kur galimas Itella išperkamojo mokesčio atsiskaitymo būdas"
 
 #: loco:5e85c085ed0cfa5a24522804
 msgid ""
 "The extra amount you charging for cash on delivery (leave blank or zero if "
 "you don't charge extra)"
 msgstr ""
+"Papildoma suma už išperkamąjį mokestį (palikite tuščią arba įrašykite nulį, "
+"jei neketinate imti papildomo mokesčio)"
 
 #: loco:5e85c408ed0cfa5bcb79e224
 msgid "Please enable at least one shipping method"
-msgstr ""
+msgstr "Pasirinkite bent vieną siuntimo būdą"
 
 #: loco:5e85c43aed0cfa5b8a0e2c82
 msgid "Please enable at least one country"
-msgstr ""
+msgstr "Pasirinkite bent vieną šalį"
 
 #: loco:5e85e6a0ed0cfa6d541bf123
 msgid "COD plugin for Itella"
-msgstr ""
+msgstr "Itella išperkamojo mokesčio (COD) įskiepis"
