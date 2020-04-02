@@ -2,3 +2,9 @@
 .d-none {
   display: none;
 }
+
+.itella-cod-extra-fee-type {
+  &:focus {
+    color: #32373c!important;
+  }
+}
