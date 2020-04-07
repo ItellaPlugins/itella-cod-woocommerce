@@ -152,7 +152,8 @@ class Itella_Cod_Public
 
     global $woocommerce;
     $current_country = $woocommerce->customer->get_shipping_country();
-    $enabledCountries[] = $this->itella_cod_settings['enabled_countries'];
+    $enabledCountries = $this->itella_cod_settings['enabled_countries'];
+    $enabledCountries = $enabledCountries ? $enabledCountries : array();
 
     return in_array($current_country, $enabledCountries) ? true : false;
 
