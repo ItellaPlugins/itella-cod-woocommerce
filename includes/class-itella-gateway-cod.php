@@ -405,8 +405,25 @@ class Itella_Gateway_COD extends WC_Gateway_COD
 //      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
         $options[$method->get_method_title()] = array();
 
+        // show itella pp and courier methods if they are enabled in shipping plugin
+        if (stripos($method->get_method_title(), 'itella') !== false) {
+          $is_pickup_method = $method->settings['pickup_point_method'] === 'yes';
+          $is_courier_method = $method->settings['courier_method'] === 'yes';
+
+          if ($is_pickup_method) {
+            $options[$method->get_method_title()]['pickup_point_method'] = __('Pickup Point', 'itella_cod');
+          }
+          if ($is_courier_method) {
+            $options[$method->get_method_title()]['courier_method'] = __('Courier', 'itella_cod');
+          }
+        }
+
         // Translators: %1$s shipping method name.
         $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'woocommerce'), $method->get_method_title());
+
+        if (stripos($method->get_method_title(), 'itella') !== false && ($is_courier_method || $is_pickup_method)) {
+        unset($options[$method->get_method_title()][$method->id]);
+        }
 
         foreach ($zones as $zone) {
 
@@ -419,6 +436,8 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             }
 
             $option_id = $shipping_method_instance->get_rate_id();
+
+
 
             // Translators: %1$s shipping method title, %2$s shipping method id.
             $option_instance_title = sprintf(__('%1$s (#%2$s)', 'woocommerce'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
@@ -444,7 +463,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     if (!isset($post_data['woocommerce_itella_cod_enable_for_methods'])) {
       WC_Admin_Settings::add_error(__('Please enable at least one shipping method', 'itella-cod'));
       $_POST['woocommerce_itella_cod_enable_for_methods'] = ''; // prevent from generating same error again
-      
+
     }
     if (!isset($post_data['woocommerce_itella_cod_enabled_countries'])) {
       WC_Admin_Settings::add_error(__('Please enable at least one country', 'itella-cod'));
