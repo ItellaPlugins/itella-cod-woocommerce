@@ -338,7 +338,13 @@ class Itella_Gateway_COD extends WC_Gateway_COD
       }
     }
 
-    return parent::is_available();
+    $is_available = ( 'yes' === $this->enabled );
+
+    if ( WC()->cart && 0 < $this->get_order_total() && 0 < $this->max_amount && $this->max_amount < $this->get_order_total() ) {
+      $is_available = false;
+    }
+
+    return $is_available;
 
   }
 
@@ -411,10 +417,10 @@ class Itella_Gateway_COD extends WC_Gateway_COD
           $is_courier_method = $method->settings['courier_method'] === 'yes';
 
           if ($is_pickup_method) {
-            $options[$method->get_method_title()]['pickup_point_method'] = __('Pickup Point', 'itella_cod');
+            $options[$method->get_method_title()]['itella_pp'] = __('Pickup Point', 'itella_cod');
           }
           if ($is_courier_method) {
-            $options[$method->get_method_title()]['courier_method'] = __('Courier', 'itella_cod');
+            $options[$method->get_method_title()]['itella_c'] = __('Courier', 'itella_cod');
           }
         }
 
@@ -436,8 +442,6 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             }
 
             $option_id = $shipping_method_instance->get_rate_id();
-
-
 
             // Translators: %1$s shipping method title, %2$s shipping method id.
             $option_instance_title = sprintf(__('%1$s (#%2$s)', 'woocommerce'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
@@ -512,7 +516,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
       foreach ($chosen_package_rate_ids as $package_key => $chosen_package_rate_id) {
         if (!empty($shipping_packages[$package_key]['rates'][$chosen_package_rate_id])) {
           $chosen_rate = $shipping_packages[$package_key]['rates'][$chosen_package_rate_id];
-          $canonical_rate_ids[] = $chosen_rate->get_method_id() . ':' . $chosen_rate->get_instance_id();
+          $canonical_rate_ids[] = $chosen_package_rate_id . ':' . $chosen_rate->get_instance_id();
         }
       }
     }
@@ -525,7 +529,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    * Indicates whether a rate exists in an array of canonically-formatted rate IDs that activates this gateway.
    *
    * @param array $rate_ids Rate ids to check.
-   * @return boolean
+   * @return array|bool
    * @since  3.4.0
    *
    */
