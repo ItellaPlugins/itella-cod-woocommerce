@@ -199,11 +199,6 @@ class Itella_Cod_Public
       unset($available_gateways['itella_cod']);
     }
 
-    // disable default cod if itella is selected as shipping method
-//    if ($this->is_itella_shipping_method_selected()) {
-//      unset($available_gateways['cod']);
-//    }
-
     return $available_gateways;
   }
 
