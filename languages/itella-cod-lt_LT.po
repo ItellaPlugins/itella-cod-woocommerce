@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Itella COD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-25 13:00+0200\n"
-"PO-Revision-Date: 2020-04-02 16:20+0300\n"
+"PO-Revision-Date: 2020-05-11 16:58+0300\n"
 "Last-Translator: mantas tarutis\n"
 "Language-Team: Lithuanian (Lithuania)\n"
 "Language: lt-LT\n"
@@ -15,14 +15,14 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en-US\n"
 "X-Loco-Project-Id: 86547\n"
-"X-Loco-Api-Version: 1.0.24 20191119-1"
+"X-Loco-Api-Version: 1.0.24 20200414-1"
 
 #: loco:5e858969ed0cfa3c0c772092
-msgid "Itella Cash on Delivery"
+msgid "Itella Card on Delivery"
 msgstr "Itella išperkamasis mokestis (COD)"
 
 #: loco:5e8589d9ed0cfa3bd81d7f82
-msgid "Setup Itella's Cash on Delivery."
+msgid "Setup Itella's Card on Delivery."
 msgstr "Sukonfigūruokite Itella išperkamąjį mokestį (COD)"
 
 #: loco:5e858df0ed0cfa3cf544d603
@@ -93,8 +93,8 @@ msgid "Select Countries"
 msgstr "Pasirinkite šalis"
 
 #: loco:5e85b33d4d3dd74115210902
-msgid "Pay with cash upon delivery."
-msgstr "Mokėkite grynais pristatymo metu."
+msgid "Pay with card upon delivery."
+msgstr "Mokėkite kortele pristatymo metu."
 
 #: loco:5e85baca4d3dd742fa636b55
 msgid "Enable"
@@ -119,7 +119,7 @@ msgstr ""
 
 #: loco:5e85c085ed0cfa5a24522804
 msgid ""
-"The extra amount you charging for cash on delivery (leave blank or zero if "
+"The extra amount you charging for card on delivery (leave blank or zero if "
 "you don't charge extra)"
 msgstr ""
 "Papildoma suma už išperkamąjį mokestį (palikite tuščią arba įrašykite nulį, "
@@ -136,3 +136,7 @@ msgstr "Pasirinkite bent vieną šalį"
 #: loco:5e85e6a0ed0cfa6d541bf123
 msgid "COD plugin for Itella"
 msgstr "Itella išperkamojo mokesčio (COD) įskiepis"
+
+#: loco:5eb958bec38e0f7bac060a24
+msgid "Enable card on delivery"
+msgstr "Įjunkite išperkamąjį mokestį."

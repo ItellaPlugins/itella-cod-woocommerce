@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Itella COD\n"
 "Report-Msgid-Bugs-To: mantas tarutis\n"
-"POT-Creation-Date: 2020-04-02 16:21+0300\n"
+"POT-Creation-Date: 2020-05-11 16:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,14 +16,14 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en-US\n"
 "X-Loco-Project-Id: 86547\n"
-"X-Loco-Api-Version: 1.0.24 20191119-1"
+"X-Loco-Api-Version: 1.0.24 20200414-1"
 
 #: loco:5e858969ed0cfa3c0c772092
-msgid "Itella Cash on Delivery"
+msgid "Itella Card on Delivery"
 msgstr ""
 
 #: loco:5e8589d9ed0cfa3bd81d7f82
-msgid "Setup Itella's Cash on Delivery."
+msgid "Setup Itella's Card on Delivery."
 msgstr ""
 
 #: loco:5e858df0ed0cfa3cf544d603
@@ -89,7 +89,7 @@ msgid "Select Countries"
 msgstr ""
 
 #: loco:5e85b33d4d3dd74115210902
-msgid "Pay with cash upon delivery."
+msgid "Pay with card upon delivery."
 msgstr ""
 
 #: loco:5e85baca4d3dd742fa636b55
@@ -114,7 +114,7 @@ msgstr ""
 
 #: loco:5e85c085ed0cfa5a24522804
 msgid ""
-"The extra amount you charging for cash on delivery (leave blank or zero if "
+"The extra amount you charging for card on delivery (leave blank or zero if "
 "you don't charge extra)"
 msgstr ""
 
@@ -128,4 +128,8 @@ msgstr ""
 
 #: loco:5e85e6a0ed0cfa6d541bf123
 msgid "COD plugin for Itella"
+msgstr ""
+
+#: loco:5eb958bec38e0f7bac060a24
+msgid "Enable card on delivery"
 msgstr ""

@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Itella Cash on Delivery Gateway.
+ * Itella Card on Delivery Gateway.
  *
- * Provides a Cash on Delivery Payment Gateway.
+ * Provides a Card on Delivery Payment Gateway.
  *
  * @class       Itella_Gateway_COD
  * @extends     WC_Gateway_COD
@@ -48,8 +48,8 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         . DIRECTORY_SEPARATOR . 'img'
         . DIRECTORY_SEPARATOR . 'itella.png'
     );
-    $this->method_title = __('Itella Cash on Delivery', 'itella-cod');
-    $this->method_description = __('Setup Itella\'s Cash on Delivery.', 'itella-cod');
+    $this->method_title = __('Itella Card on Delivery', 'itella-cod');
+    $this->method_description = __('Setup Itella\'s Card on Delivery.', 'itella-cod');
     $this->countries = new WC_Countries();
     $this->load_plugin_textdomain();
   }
@@ -73,7 +73,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $this->form_fields = array(
         'enabled' => array(
             'title' => __('Enable/Disable', 'woocommerce'),
-            'label' => __('Enable cash on delivery', 'woocommerce'),
+            'label' => __('Enable card on delivery', 'itella-cod'),
             'type' => 'checkbox',
             'description' => '',
             'default' => 'no',
@@ -82,21 +82,21 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             'title' => __('Title', 'woocommerce'),
             'type' => 'text',
             'description' => __('Payment method description that the customer will see on your checkout.', 'woocommerce'),
-            'default' => __('Cash on delivery', 'woocommerce'),
+            'default' => __('Card on delivery', 'itella-cod'),
             'desc_tip' => true,
         ),
         'description' => array(
             'title' => __('Description', 'woocommerce'),
             'type' => 'textarea',
             'description' => __('Payment method description that the customer will see on your website.', 'woocommerce'),
-            'default' => __('Pay with cash upon delivery.', 'itella-cod'),
+            'default' => __('Pay with card upon delivery.', 'itella-cod'),
             'desc_tip' => true,
         ),
         'instructions' => array(
             'title' => __('Instructions', 'woocommerce'),
             'type' => 'textarea',
             'description' => __('Instructions that will be added to the thank you page.', 'woocommerce'),
-            'default' => __('Pay with cash upon delivery.', 'itella-cod'),
+            'default' => __('Pay with card upon delivery.', 'itella-cod'),
             'desc_tip' => true,
         ),
         'enable_for_methods' => array(
@@ -147,7 +147,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
             'title' => __('Extra Fee Amount', 'itella-cod'),
             'type' => 'price',
             'class' => 'itella-cod-extra-fee-amount',
-            'description' => __('The extra amount you charging for cash on delivery (leave blank or zero if you don\'t charge extra)', 'itella-cod'),
+            'description' => __('The extra amount you charging for card on delivery (leave blank or zero if you don\'t charge extra)', 'itella-cod'),
             'desc_tip' => true,
             'placeholder' => __('Enter Amount', 'itella-cod')
         ),
