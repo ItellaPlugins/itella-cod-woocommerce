@@ -76,7 +76,7 @@ class Itella_Cod_Public
   public function enqueue_styles()
   {
 
-    wp_enqueue_style($this->name, plugin_dir_url(__FILE__) . 'css/itella-cod-public.css', array(), $this->version, 'all');
+//    wp_enqueue_style($this->name, plugin_dir_url(__FILE__) . 'css/itella-cod-public.css', array(), $this->version, 'all');
 
   }
 
