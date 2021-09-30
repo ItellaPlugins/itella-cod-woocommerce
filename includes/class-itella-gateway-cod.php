@@ -412,7 +412,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         $options[$method->get_method_title()] = array();
 
         // show itella pp and courier methods if they are enabled in shipping plugin
-        if (stripos($method->get_method_title(), 'itella') !== false) {
+        if (stripos($method->id, 'itella') !== false) {
           $is_pickup_method = $method->settings['pickup_point_method'] === 'yes';
           $is_courier_method = $method->settings['courier_method'] === 'yes';
 
@@ -427,7 +427,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         // Translators: %1$s shipping method name.
         $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'woocommerce'), $method->get_method_title());
 
-        if (stripos($method->get_method_title(), 'itella') !== false && ($is_courier_method || $is_pickup_method)) {
+        if (stripos($method->id, 'itella') !== false && ($is_courier_method || $is_pickup_method)) {
         unset($options[$method->get_method_title()][$method->id]);
         }
 
