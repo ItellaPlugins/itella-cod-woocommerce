@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Itella COD\n"
 "Report-Msgid-Bugs-To: mantas tarutis\n"
-"POT-Creation-Date: 2020-05-11 16:59+0300\n"
+"POT-Creation-Date: 2023-01-27 11:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,123 +13,141 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Source-Locale: en-US\n"
 "X-Loco-Project-Id: 86547\n"
 "X-Loco-Api-Version: 1.0.24 20200414-1"
 
-#: loco:5e858969ed0cfa3c0c772092
-msgid "Itella Card on Delivery"
+#: includes/class-itella-gateway-cod.php:85
+msgid "Card on delivery"
 msgstr ""
 
-#: loco:5e8589d9ed0cfa3bd81d7f82
-msgid "Setup Itella's Card on Delivery."
+#. Description of the plugin
+msgid "Card on delivery payment method for Smartpost Itella shipping"
 msgstr ""
 
-#: loco:5e858df0ed0cfa3cf544d603
-msgid "Select Itella COD methods."
+#: includes/class-itella-gateway-cod.php:161
+msgid "Disable"
 msgstr ""
 
-#: loco:5e858e23ed0cfa3d903633d2
+#: includes/class-itella-gateway-cod.php:168
+msgid "Disable extra fee if cart amount is greater or equal than this limit."
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:140
+msgid "Disabled"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:160
+msgid "Enable"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:76
+msgid "Enable card on delivery"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:122
 msgid "Enable for specific countries"
 msgstr ""
 
-#: loco:5e858ecded0cfa3da4537012
-msgid "Select Extra fee type"
-msgstr ""
-
-#: loco:5e858eeaed0cfa3da13ef7d2
-msgid "Extra Fee Amount"
-msgstr ""
-
-#: loco:5e858f33ed0cfa3dac34a163
+#: includes/class-itella-gateway-cod.php:152
+#: includes/class-itella-gateway-cod.php:173
 msgid "Enter Amount"
 msgstr ""
 
-#: loco:5e858ff2ed0cfa3dda11e332
+#: includes/class-itella-gateway-cod.php:135
+msgid "Extra Fee"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:147
+msgid "Extra Fee Amount"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:155
 msgid "Extra Fee Tax"
 msgstr ""
 
-#: loco:5e859223ed0cfa3ff1443572
+#: includes/class-itella-gateway-cod.php:141
+msgid "Fixed"
+msgstr ""
+
+#: includes/class-itella-cod.php:212
+msgid "here"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://itella.lt/en/"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:164
 msgid ""
 "Is extra fee taxable? Use this option if you have taxes enabled in your shop "
 "and you want to include tax to COD method."
 msgstr ""
 
-#: loco:5e8592c9ed0cfa40243065d3
-msgid "Disable extra fee if cart amount is greater or equal than this limit."
+#. Author of the plugin
+msgid "Itella Team"
 msgstr ""
 
-#: loco:5e859327ed0cfa40212b2e82
+#: includes/class-itella-gateway-cod.php:171
 msgid "Leave blank or zero if you want to charge for any amount"
 msgstr ""
 
-#: loco:5e859423ed0cfa407926ae42
-msgid "Fixed"
-msgstr ""
-
-#: loco:5e859437ed0cfa4084101754
-msgid "Percentage"
-msgstr ""
-
-#: loco:5e859540ed0cfa420c4380f2
-msgid "Setup Itella COD"
-msgstr ""
-
-#: loco:5e85956ded0cfa423a326b12
-msgid "here"
-msgstr ""
-
-#: loco:5e85962ded0cfa4268361372
-msgid "Itella COD"
-msgstr ""
-
-#: loco:5e85af434d3dd73fb45f67a3
-msgid "Select Countries"
-msgstr ""
-
-#: loco:5e85b33d4d3dd74115210902
+#: includes/class-itella-gateway-cod.php:92
+#: includes/class-itella-gateway-cod.php:99
 msgid "Pay with card upon delivery."
 msgstr ""
 
-#: loco:5e85baca4d3dd742fa636b55
-msgid "Enable"
+#: includes/class-itella-gateway-cod.php:142
+msgid "Percentage"
 msgstr ""
 
-#: loco:5e85bad94d3dd743126f0945
-msgid "Disable"
-msgstr ""
-
-#: loco:5e85bb204d3dd743475b7e92
-msgid "Disabled"
-msgstr ""
-
-#: loco:5e85bd30ed0cfa585f667b92
-msgid "Extra Fee"
-msgstr ""
-
-#: loco:5e85bfc3ed0cfa59fd6b8884
-msgid "Select countries you want to enable the Itella COD method"
-msgstr ""
-
-#: loco:5e85c085ed0cfa5a24522804
-msgid ""
-"The extra amount you charging for card on delivery (leave blank or zero if "
-"you don't charge extra)"
-msgstr ""
-
-#: loco:5e85c408ed0cfa5bcb79e224
-msgid "Please enable at least one shipping method"
-msgstr ""
-
-#: loco:5e85c43aed0cfa5b8a0e2c82
+#: includes/class-itella-gateway-cod.php:471
 msgid "Please enable at least one country"
 msgstr ""
 
-#: loco:5e85e6a0ed0cfa6d541bf123
-msgid "COD plugin for Itella"
+#: includes/class-itella-gateway-cod.php:466
+msgid "Please enable at least one shipping method"
 msgstr ""
 
-#: loco:5eb958bec38e0f7bac060a24
-msgid "Enable card on delivery"
+#: includes/class-itella-gateway-cod.php:130
+msgid "Select Countries"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:125
+msgid "Select countries you want to enable the Itella COD method"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:138
+msgid "Select Extra fee type"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:108
+msgid "Select Itella COD methods."
+msgstr ""
+
+#: includes/class-itella-cod.php:210
+msgid "Setup Itella COD"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:52
+msgid "Setup Smartpost Itella's Card on Delivery."
+msgstr ""
+
+#: public/class-itella-cod-public.php:109
+msgid "Smartpost COD"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:51
+msgid "Smartpost Itella Card on Delivery"
+msgstr ""
+
+#. Name of the plugin
+msgid "Smartpost Itella COD"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:150
+msgid ""
+"The extra amount you charging for card on delivery (leave blank or zero if "
+"you don't charge extra)"
 msgstr ""
