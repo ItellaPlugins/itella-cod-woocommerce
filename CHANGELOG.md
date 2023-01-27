@@ -1,8 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.3] - 2023-01-27
 ### Changed
 - changed name 'Itella' to 'Smartpost'
+
+### Improved
+- added changelog file
 
 ## [1.0.2] - 2020-06-04
 ### Fixed
