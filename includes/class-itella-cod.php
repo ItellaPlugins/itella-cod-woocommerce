@@ -34,7 +34,7 @@ class Itella_Cod
   {
 
     $this->plugin_name = 'itella-cod';
-    $this->version = '1.0.0';
+    $this->version = '1.0.3';
 
     add_action('plugins_loaded', array($this, 'load_dependencies'));
     add_action('admin_notices', array($this, 'notify_on_activation'));
