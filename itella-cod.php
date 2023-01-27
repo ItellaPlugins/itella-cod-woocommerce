@@ -1,21 +1,23 @@
 <?php
 
 /**
- * @link              http://example.com
+ * @link              
  * @since             1.0.0
  * @package           Itella_COD_Plugin
  *
  * @wordpress-plugin
- * Plugin Name:       Itella COD
- * Plugin URI:        //
- * Description:       COD plugin for Itella
+ * Plugin Name:       Smartpost Itella COD
+ * Description:       Card on delivery plugin for Smartpost Itella
  * Version:           1.0.0
  * Author:            Itella Team
- * Author URI:        www.itella.lt
+ * Author URI:        https://itella.lt/en/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       itella-cod
  * Domain Path:       /languages
+ * 
+ * Tested up to:      6.1.1
+ * WC tested up to:   7.3.0
  */
 
 if ( ! defined( 'WPINC' ) ) {
