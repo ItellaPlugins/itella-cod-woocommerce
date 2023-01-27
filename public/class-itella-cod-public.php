@@ -106,17 +106,18 @@ class Itella_Cod_Public
       $extra_fee_amount = $this->itella_cod_settings['extra_fee'];
 
       if ($this->itella_cod_settings['extra_fee_type'] != 'disabled') {
+        $title = __('Smartpost COD', 'itella-cod');
         if ($extra_fee_type === 'fixed' && $is_taxable) {
-          $cart->add_fee(__('Itella COD', 'itella-cod'), $extra_fee_amount, true);
+          $cart->add_fee($title, $extra_fee_amount, true);
         }
         if ($extra_fee_type === 'fixed' && !$is_taxable) {
-          $cart->add_fee(__('Itella COD', 'itella-cod'), $extra_fee_amount);
+          $cart->add_fee($title, $extra_fee_amount);
         }
         if ($extra_fee_type === 'percentage' && $is_taxable) {
-          $cart->add_fee(__('Itella COD', 'itella-cod'), $this->calc_extra_fee_percentage($extra_fee_amount, $cart), true);
+          $cart->add_fee($title, $this->calc_extra_fee_percentage($extra_fee_amount, $cart), true);
         }
         if ($extra_fee_type === 'percentage' && !$is_taxable) {
-          $cart->add_fee(__('Itella COD', 'itella-cod'), $this->calc_extra_fee_percentage($extra_fee_amount, $cart));
+          $cart->add_fee($title, $this->calc_extra_fee_percentage($extra_fee_amount, $cart));
         }
       }
     }
