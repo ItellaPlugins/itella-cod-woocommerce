@@ -48,8 +48,8 @@ class Itella_Gateway_COD extends WC_Gateway_COD
         . DIRECTORY_SEPARATOR . 'img'
         . DIRECTORY_SEPARATOR . 'itella.png'
     );
-    $this->method_title = __('Itella Card on Delivery', 'itella-cod');
-    $this->method_description = __('Setup Itella\'s Card on Delivery.', 'itella-cod');
+    $this->method_title = __('Smartpost Itella Card on Delivery', 'itella-cod');
+    $this->method_description = __('Setup Smartpost Itella\'s Card on Delivery.', 'itella-cod');
     $this->countries = new WC_Countries();
     $this->load_plugin_textdomain();
   }
@@ -392,71 +392,69 @@ class Itella_Gateway_COD extends WC_Gateway_COD
   {
 
     // Since this is expensive, we only want to do it if we're actually on the settings page.
-    if (!$this->is_accessing_settings()) {
+    if ( ! $this->is_accessing_settings() ) {
       return array();
     }
 
     $data_store = WC_Data_Store::load('shipping-zone');
     $raw_zones = $data_store->get_zones();
 
-    foreach ($raw_zones as $raw_zone) {
+    foreach ( $raw_zones as $raw_zone ) {
       $zones[] = new WC_Shipping_Zone($raw_zone);
     }
 
     $zones[] = new WC_Shipping_Zone(0);
 
     $options = array();
-    foreach (WC()->shipping()->load_shipping_methods() as $method) {
+    foreach ( WC()->shipping()->load_shipping_methods() as $method ) {
+      if ( stripos($method->id, 'itella') === false ) { // Show only itella shipping methods
+        //continue;
+      }
 
-//      if (stripos($method->get_method_title(), 'itella') !== false) { //show only itella shipping methods
-        $options[$method->get_method_title()] = array();
+      $options[$method->get_method_title()] = array();
 
-        // show itella pp and courier methods if they are enabled in shipping plugin
-        if (stripos($method->id, 'itella') !== false) {
-          $is_pickup_method = $method->settings['pickup_point_method'] === 'yes';
-          $is_courier_method = $method->settings['courier_method'] === 'yes';
+      // Show itella pp and courier methods if they are enabled in shipping plugin
+      if ( stripos($method->id, 'itella') !== false ) {
+        $is_pickup_method = $method->settings['pickup_point_method'] === 'yes';
+        $is_courier_method = $method->settings['courier_method'] === 'yes';
 
-          if ($is_pickup_method) {
-            $options[$method->get_method_title()]['itella_pp'] = __('Pickup Point', 'itella_cod');
-          }
-          if ($is_courier_method) {
-            $options[$method->get_method_title()]['itella_c'] = __('Courier', 'itella_cod');
-          }
+        if ( $is_pickup_method ) {
+          $options[$method->get_method_title()]['itella_pp'] = __('Pickup Point', 'itella_cod');
         }
+        if ( $is_courier_method ) {
+          $options[$method->get_method_title()]['itella_c'] = __('Courier', 'itella_cod');
+        }
+      }
 
-        // Translators: %1$s shipping method name.
-        $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'woocommerce'), $method->get_method_title());
+      // Translators: %1$s shipping method name.
+      $options[$method->get_method_title()][$method->id] = sprintf(__('Any &quot;%1$s&quot; method', 'woocommerce'), $method->get_method_title());
 
-        if (stripos($method->id, 'itella') !== false && ($is_courier_method || $is_pickup_method)) {
+      if ( stripos($method->id, 'itella') !== false && ($is_courier_method || $is_pickup_method) ) {
         unset($options[$method->get_method_title()][$method->id]);
-        }
+      }
 
-        foreach ($zones as $zone) {
+      foreach ( $zones as $zone ) {
+        $shipping_method_instances = $zone->get_shipping_methods();
 
-          $shipping_method_instances = $zone->get_shipping_methods();
-
-          foreach ($shipping_method_instances as $shipping_method_instance_id => $shipping_method_instance) {
-
-            if ($shipping_method_instance->id !== $method->id) {
-              continue;
-            }
-
-            $option_id = $shipping_method_instance->get_rate_id();
-
-            // Translators: %1$s shipping method title, %2$s shipping method id.
-            $option_instance_title = sprintf(__('%1$s (#%2$s)', 'woocommerce'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
-
-            // Translators: %1$s zone name, %2$s shipping method instance name.
-            $option_title = sprintf(__('%1$s &ndash; %2$s', 'woocommerce'), $zone->get_id() ? $zone->get_zone_name() : __('Other locations', 'woocommerce'), $option_instance_title);
-
-            $options[$method->get_method_title()][$option_id] = $option_title;
+        foreach ( $shipping_method_instances as $shipping_method_instance_id => $shipping_method_instance ) {
+          if ( $shipping_method_instance->id !== $method->id ) {
+            continue;
           }
+
+          $option_id = $shipping_method_instance->get_rate_id();
+
+          // Translators: %1$s shipping method title, %2$s shipping method id.
+          $option_instance_title = sprintf(__('%1$s (#%2$s)', 'woocommerce'), $shipping_method_instance->get_title(), $shipping_method_instance_id);
+
+          // Translators: %1$s zone name, %2$s shipping method instance name.
+          $option_title = sprintf(__('%1$s &ndash; %2$s', 'woocommerce'), $zone->get_id() ? $zone->get_zone_name() : __('Other locations', 'woocommerce'), $option_instance_title);
+
+          $options[$method->get_method_title()][$option_id] = $option_title;
         }
-//      }
+      }
     }
 
     return $options;
-
   }
 
   public function process_admin_options()
@@ -575,11 +573,11 @@ class Itella_Gateway_COD extends WC_Gateway_COD
    */
   public function thankyou_page()
   {
-
+    echo '<div class="itella-cod">';
     if ($this->instructions) {
       echo wp_kses_post(wpautop(wptexturize($this->instructions)));
     }
-
+    echo '</div>';
   }
 
   /**
