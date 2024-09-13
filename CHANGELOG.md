@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.4] - 2024-09-13
 ### Improved
 - the plugin is marked as compatible with HPOS
 
