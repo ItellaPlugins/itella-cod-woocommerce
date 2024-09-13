@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       Smartpost Itella COD
  * Description:       Card on delivery payment method for Smartpost Itella shipping
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Itella Team
  * Author URI:        https://itella.lt/en/
  * License:           GPL-2.0+
@@ -41,3 +41,11 @@ function run_itella_cod() {
 	$plugin = new Itella_Cod();
 }
 run_itella_cod();
+
+function declare_itella_cod_compatibility()
+{
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+	  \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+	}
+}
+add_action('before_woocommerce_init', 'declare_itella_cod_compatibility');
