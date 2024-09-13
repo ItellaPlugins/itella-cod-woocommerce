@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Improved
+- the plugin is marked as compatible with HPOS
+
 ## [1.0.3] - 2023-01-27
 ### Changed
 - changed name 'Itella' to 'Smartpost'
