@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Itella COD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-25 13:00+0200\n"
-"PO-Revision-Date: 2023-01-27 11:07+0000\n"
+"PO-Revision-Date: 2025-03-04 15:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: Lithuanian\n"
 "Language: lt_LT\n"
@@ -16,17 +16,17 @@ msgstr ""
 "X-Loco-Source-Locale: en-US\n"
 "X-Loco-Project-Id: 86547\n"
 "X-Loco-Api-Version: 1.0.24 20200414-1\n"
-"X-Loco-Version: 2.6.3; wp-6.1.1"
+"X-Loco-Version: 2.7.1; wp-6.7.2"
 
 #: includes/class-itella-gateway-cod.php:85
 msgid "Card on delivery"
 msgstr "Kortele pristatant"
 
 #. Description of the plugin
-msgid "Card on delivery payment method for Smartpost Itella shipping"
+#| msgid "Card on delivery payment method for Smartpost Itella shipping"
+msgid "Card on delivery payment method for Smartposti shipping"
 msgstr ""
-"Apmokėjimo kortele pristatymo metu metodas skirtas Smartpost Itella "
-"pristatymui"
+"Apmokėjimo kortele pristatymo metu metodas skirtas Smartposti pristatymui"
 
 #: includes/class-itella-gateway-cod.php:161
 msgid "Disable"
@@ -73,7 +73,7 @@ msgstr "Papildomo mokesčio apmokestinimas"
 msgid "Fixed"
 msgstr "Fiksuotas"
 
-#: includes/class-itella-cod.php:212
+#: includes/class-itella-cod.php:210
 msgid "here"
 msgstr "čia"
 
@@ -134,25 +134,27 @@ msgstr "Pasirinkite papildomo mokesčio tipą"
 msgid "Select Itella COD methods."
 msgstr "Pasirinkite Itella siuntimo būdus"
 
-#: includes/class-itella-cod.php:210
-msgid "Setup Itella COD"
-msgstr "Sukonfigūruokite Itella išperkamąjį mokestį (COD)"
+#. %1$s - plugin name, %2$s - word "here" with link to settings page
+#: includes/class-itella-cod.php:208
+#, php-format
+msgid "Setup %1$s %2$s"
+msgstr "Nustatykite %1$s %2$s"
+
+#: includes/class-itella-gateway-cod.php:53
+#| msgid "Setup Smartpost Itella's Card on Delivery."
+msgid "Setup Smartposti Card on Delivery."
+msgstr "Smartposti apmokėjimo kortele pristatymo metu nustatymai."
 
 #: includes/class-itella-gateway-cod.php:52
-msgid "Setup Smartpost Itella's Card on Delivery."
-msgstr "Smartpost Itella apmokėjimo kortele pristatymo metu nustatymai."
-
-#: public/class-itella-cod-public.php:109
-msgid "Smartpost COD"
-msgstr "Smartpost COD"
-
-#: includes/class-itella-gateway-cod.php:51
-msgid "Smartpost Itella Card on Delivery"
-msgstr "Smartpost Itella išperkamasis mokestis (COD)"
+#| msgid "Smartpost Itella Card on Delivery"
+msgid "Smartposti Card on Delivery"
+msgstr "Smartposti išperkamasis mokestis (COD)"
 
 #. Name of the plugin
-msgid "Smartpost Itella COD"
-msgstr "Smartpost Itella išperkamasis mokestis (COD)"
+#: public/class-itella-cod-public.php:109 includes/class-itella-cod.php:209
+#| msgid "Smartpost COD"
+msgid "Smartposti COD"
+msgstr "Smartposti COD"
 
 #: includes/class-itella-gateway-cod.php:150
 msgid ""
