@@ -203,15 +203,16 @@ class Itella_Cod
 
   public function notify_on_activation()
   {
+    $msg = sprintf(
+      /* translators: %1$s - plugin name, %2$s - word "here" with link to settings page */
+      __('Setup %1$s %2$s', 'itella-cod'),
+      __('Smartposti COD', 'itella-cod'),
+      '<a href="' . admin_url('admin.php?page=wc-settings&tab=checkout&section=itella_cod') . '">' . __('here', 'itella-cod') . '</a>'
+    );
 
     if (get_transient('itella-cod-activated')) : ?>
         <div class="updated notice is-dismissible">
-            <p>
-              <?= __('Setup Itella COD', 'itella-cod') ?>
-                <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=checkout&section=itella_cod'); ?>">
-                    <?= __('here', 'itella-cod') ?>
-                </a>.
-            </p>
+            <p><?php echo $msg; ?></p>
         </div>
       <?php
       delete_transient('itella-cod-activated');

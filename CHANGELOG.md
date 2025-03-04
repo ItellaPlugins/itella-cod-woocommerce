@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+### Changed
+- changed name 'Smartpost' to 'Smartposti'
+
+### Fixed
+- fixed textdomain not loading too early
+
 ## [1.0.4] - 2024-09-13
 ### Improved
 - the plugin is marked as compatible with HPOS
