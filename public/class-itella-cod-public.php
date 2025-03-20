@@ -106,7 +106,7 @@ class Itella_Cod_Public
       $extra_fee_amount = $this->itella_cod_settings['extra_fee'];
 
       if ($this->itella_cod_settings['extra_fee_type'] != 'disabled') {
-        $title = __('Smartpost COD', 'itella-cod');
+        $title = __('Smartposti COD', 'itella-cod');
         if ($extra_fee_type === 'fixed' && $is_taxable) {
           $cart->add_fee($title, $extra_fee_amount, true);
         }

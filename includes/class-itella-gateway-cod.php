@@ -33,6 +33,7 @@ class Itella_Gateway_COD extends WC_Gateway_COD
   public function __construct()
   {
     parent::__construct();
+    add_action('init', array($this, 'load_plugin_textdomain'));
   }
 
   /**
@@ -46,12 +47,11 @@ class Itella_Gateway_COD extends WC_Gateway_COD
     $this->icon = apply_filters(
         'woocommerce_itella_cod_icon', plugin_dir_url(dirname(__FILE__)) . 'assets'
         . DIRECTORY_SEPARATOR . 'img'
-        . DIRECTORY_SEPARATOR . 'itella.png'
+        . DIRECTORY_SEPARATOR . 'logo.png'
     );
-    $this->method_title = __('Smartpost Itella Card on Delivery', 'itella-cod');
-    $this->method_description = __('Setup Smartpost Itella\'s Card on Delivery.', 'itella-cod');
+    $this->method_title = __('Smartposti Card on Delivery', 'itella-cod');
+    $this->method_description = __('Setup Smartposti Card on Delivery.', 'itella-cod');
     $this->countries = new WC_Countries();
-    $this->load_plugin_textdomain();
   }
 
   public function load_plugin_textdomain() {

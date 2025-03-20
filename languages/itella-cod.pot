@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Itella COD\n"
 "Report-Msgid-Bugs-To: mantas tarutis\n"
-"POT-Creation-Date: 2023-01-27 11:03+0000\n"
+"POT-Creation-Date: 2025-03-04 15:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgid "Card on delivery"
 msgstr ""
 
 #. Description of the plugin
-msgid "Card on delivery payment method for Smartpost Itella shipping"
+msgid "Card on delivery payment method for Smartposti shipping"
 msgstr ""
 
 #: includes/class-itella-gateway-cod.php:161
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Fixed"
 msgstr ""
 
-#: includes/class-itella-cod.php:212
+#: includes/class-itella-cod.php:210
 msgid "here"
 msgstr ""
 
@@ -126,24 +126,23 @@ msgstr ""
 msgid "Select Itella COD methods."
 msgstr ""
 
-#: includes/class-itella-cod.php:210
-msgid "Setup Itella COD"
+#. %1$s - plugin name, %2$s - word "here" with link to settings page
+#: includes/class-itella-cod.php:208
+#, php-format
+msgid "Setup %1$s %2$s"
+msgstr ""
+
+#: includes/class-itella-gateway-cod.php:53
+msgid "Setup Smartposti Card on Delivery."
 msgstr ""
 
 #: includes/class-itella-gateway-cod.php:52
-msgid "Setup Smartpost Itella's Card on Delivery."
-msgstr ""
-
-#: public/class-itella-cod-public.php:109
-msgid "Smartpost COD"
-msgstr ""
-
-#: includes/class-itella-gateway-cod.php:51
-msgid "Smartpost Itella Card on Delivery"
+msgid "Smartposti Card on Delivery"
 msgstr ""
 
 #. Name of the plugin
-msgid "Smartpost Itella COD"
+#: public/class-itella-cod-public.php:109 includes/class-itella-cod.php:209
+msgid "Smartposti COD"
 msgstr ""
 
 #: includes/class-itella-gateway-cod.php:150
