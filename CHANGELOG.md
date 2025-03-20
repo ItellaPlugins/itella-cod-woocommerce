@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.5] - 2025-03-20
 ### Changed
 - changed name 'Smartpost' to 'Smartposti'
 

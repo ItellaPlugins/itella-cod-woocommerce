@@ -51,7 +51,7 @@ class Itella_Cod_Admin extends Itella_Gateway_COD
 
     parent::__construct();
     $this->name = 'itella_cod';
-    $this->version = '1.0.4';
+    $this->version = '1.0.5';
 
   }
 
